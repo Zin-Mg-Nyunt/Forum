@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Thread::factory(5)->create();
+        Thread::factory(10)->create();
     }
 }

@@ -170,3 +170,8 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* custom class */
+.scrollbar-hide {
+    scrollbar-width: none;
+}
