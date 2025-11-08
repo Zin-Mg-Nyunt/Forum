@@ -9,7 +9,7 @@ class Thread extends Model
 {
     /** @use HasFactory<\Database\Factories\ThreadFactory> */
     use HasFactory;
-    protected $with = ['user'];
+    protected $with = ['user','category'];
 
     // thread belongsTo user
     public function user(){
@@ -26,4 +26,11 @@ class Thread extends Model
         return $this->belongsToMany(Tag::class);
     }
 
+    public function scopeFilter($query,$filter){
+        $query->when($filter??false,function ($query) use($filter){
+            $query->whereHas('category',function($query) use($filter){
+            $query->where('slug',$filter);
+        });
+    });
+    }
 }

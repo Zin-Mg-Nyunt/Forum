@@ -1,8 +1,8 @@
 <template>
-    <div class="mx-auto max-w-7xl p-4">
-        <div
-            class="mb-6 rounded-2xl bg-gradient-to-r from-violet-600 to-indigo-600 p-6 text-white shadow-lg"
-        >
+    <div
+        class="mb-6 bg-gradient-to-r from-violet-600 to-indigo-600 px-6 py-2 text-white shadow-lg"
+    >
+        <div class="mx-auto max-w-7xl">
             <div class="flex items-center justify-between">
                 <div>
                     <Link href="/">
@@ -94,7 +94,8 @@
                 </div>
             </div>
         </div>
-
+    </div>
+    <div class="mx-auto max-w-7xl">
         <div class="flex gap-6">
             <!-- Left sidebar -->
             <aside class="hidden w-72 shrink-0 lg:block">
@@ -107,8 +108,9 @@
                         </h3>
                         <ul class="space-y-2">
                             <li v-for="cat in categories" :key="cat.id">
-                                <button
-                                    class="w-full rounded-md bg-white/50 px-3 py-2.5 text-left transition duration-200 hover:bg-white hover:shadow-sm"
+                                <Link
+                                    :href="'/?category=' + cat.slug"
+                                    class="block rounded-md bg-white/50 px-3 py-2.5 text-left transition duration-200 hover:bg-white hover:shadow-sm"
                                 >
                                     <div
                                         class="flex items-center justify-between"
@@ -122,7 +124,7 @@
                                             >24</span
                                         >
                                     </div>
-                                </button>
+                                </Link>
                             </li>
                         </ul>
                     </div>

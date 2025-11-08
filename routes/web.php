@@ -1,14 +1,13 @@
 <?php
 
 use App\Models\Thread;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::get('/', function () {
     return inertia('Home', [
-        'threads'=> Thread::latest()->get()
+        'threads'=> Thread::filter(request('category'))->latest()->get()
     ]);
 })->name('home');
 

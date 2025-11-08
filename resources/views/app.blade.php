@@ -24,10 +24,6 @@
             body{
                 background-color: #f3f3f3;
             }
-            #app{
-                height: 100vh;
-                overflow: hidden;
-            }
         </style>
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
