@@ -21,6 +21,7 @@ class ThreadFactory extends Factory
             'title'=>fake()->sentence(),
             'body'=>fake()->paragraph(),
             'user_id'=>User::factory()->create(),
+            'category_id'=>fake()->numberBetween(1,5)
         ];
     }
 }

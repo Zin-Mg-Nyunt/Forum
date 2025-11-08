@@ -63,10 +63,10 @@
                         php
                     </span>
                     <!-- <span
-                                    class="rounded-full bg-violet-100 px-3 py-1 text-xs font-medium text-violet-700"
-                                >
-                                    {{ thread.category }}
-                                </span> -->
+                        class="rounded-full bg-violet-100 px-3 py-1 text-xs font-medium text-violet-700"
+                    >
+                        {{ thread }}
+                    </span> -->
                     <span
                         class="rounded-full bg-violet-100 px-3 py-1 text-xs font-medium text-violet-700"
                     >

@@ -49,6 +49,8 @@ class User extends Authenticatable
             'two_factor_confirmed_at' => 'datetime',
         ];
     }
+
+    // user hasMany threads
     public function threads(){
         return $this->hasMany(Thread::class);
     }

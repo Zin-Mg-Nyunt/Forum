@@ -119,7 +119,7 @@
                                         >
                                         <span
                                             class="rounded-full bg-violet-100 px-2 py-0.5 text-xs font-medium text-violet-700"
-                                            >{{ cat.count }}</span
+                                            >24</span
                                         >
                                     </div>
                                 </button>
@@ -139,7 +139,7 @@
                                 :key="tag"
                                 class="rounded-full bg-white/70 px-3 py-1.5 text-sm font-medium text-emerald-700 shadow-sm transition duration-200 hover:bg-white hover:text-emerald-800 hover:shadow"
                             >
-                                {{ tag }}
+                                {{ tag.name }}
                             </button>
                         </div>
                     </div>
@@ -210,21 +210,18 @@ export default {
         auth: {
             type: Array,
         },
+        categories: {
+            type: Array,
+        },
+        tags: {
+            type: Array,
+        },
     },
     components: {
         Link,
     },
-    data() {
-        return {
-            categories: [
-                { id: 1, name: 'General', count: 124 },
-                { id: 2, name: 'Announcements', count: 12 },
-                { id: 3, name: 'Help', count: 54 },
-                { id: 4, name: 'Off-topic', count: 23 },
-            ],
-
-            tags: ['vue', 'laravel', 'javascript', 'css', 'design', 'help'],
-        };
+    mounted() {
+        console.log(this.tags);
     },
 };
 </script>
