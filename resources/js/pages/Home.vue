@@ -38,9 +38,13 @@
                     <h2 class="text-lg font-semibold text-gray-900">
                         {{ thread.title }}
                     </h2>
-                    <span class="p-1 text-sm text-gray-500"> 2 hours ago </span>
+                    <span class="p-1 text-sm text-gray-500">
+                        {{ moment(thread.created_at).fromNow() }}
+                    </span>
                 </div>
-                <p class="mb-4 text-sm leading-relaxed text-gray-600">
+                <p
+                    class="mb-4 line-clamp-2 text-sm leading-relaxed text-gray-600"
+                >
                     {{ thread.body }}
                 </p>
 
@@ -139,6 +143,8 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
     props: {
         threads: {
@@ -183,6 +189,9 @@ export default {
 
             return list;
         },
+    },
+    methods: {
+        moment,
     },
 };
 </script>

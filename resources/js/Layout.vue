@@ -220,9 +220,6 @@ export default {
     components: {
         Link,
     },
-    mounted() {
-        console.log(this.tags);
-    },
 };
 </script>
 

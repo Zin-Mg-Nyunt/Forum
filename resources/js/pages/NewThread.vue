@@ -1,43 +1,24 @@
 <script setup>
 import { Button } from '@/components/ui/button';
+import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
-
-const form = ref({
-    title: '',
-    body: '',
-    category: '',
-    tags: [],
-});
-
-const errors = ref({});
-const selectedTag = ref('');
-
-// Sample data - replace with API data later
-// const categories = [
-//     { id: 1, name: 'General Discussion' },
-//     { id: 2, name: 'Help & Support' },
-//     { id: 3, name: 'Feature Requests' },
-//     { id: 4, name: 'Bug Reports' },
-//     { id: 5, name: 'Ideas' },
-// ];
-
-// const availableTags = [
-//     'laravel',
-//     'vue',
-//     'php',
-//     'javascript',
-//     'frontend',
-//     'backend',
-//     'database',
-//     'api',
-//     'security',
-//     'design',
-// ];
 
 defineProps({
     categories: Array,
     tags: Array,
 });
+
+const errors = ref({});
+const selectedTag = ref('');
+
+const form = ref(
+    useForm({
+        title: '',
+        body: '',
+        category: '',
+        tags: [],
+    }),
+);
 
 function addTag() {
     if (selectedTag.value && !form.value.tags.includes(selectedTag.value)) {
@@ -50,9 +31,9 @@ function removeTag(tag) {
     form.value.tags = form.value.tags.filter((t) => t !== tag);
 }
 
-function handleSubmit() {
+function createThread() {
     // Handle form submission here
-    console.log('Submitting form:', form.value);
+    form.value.post('/createThread');
 }
 </script>
 
@@ -71,7 +52,7 @@ function handleSubmit() {
             </div>
 
             <!-- Form -->
-            <form @submit.prevent="handleSubmit" class="space-y-6">
+            <form @submit.prevent="createThread" class="space-y-6">
                 <!-- Title -->
                 <div>
                     <label
@@ -124,7 +105,7 @@ function handleSubmit() {
                 <div class="mt-2 flex flex-wrap gap-2">
                     <span
                         v-for="tag in form.tags"
-                        :key="tag"
+                        :key="tag.id"
                         class="inline-flex items-center rounded-full bg-violet-50 px-3 py-1 text-sm font-medium text-violet-700"
                     >
                         {{ tag.name }}
