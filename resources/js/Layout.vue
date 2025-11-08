@@ -5,23 +5,92 @@
         >
             <div class="flex items-center justify-between">
                 <div>
-                    <h1
-                        class="bg-gradient-to-r from-white to-indigo-200 bg-clip-text text-3xl font-bold text-transparent"
-                    >
-                        Forum
-                    </h1>
+                    <Link href="/">
+                        <!-- Logo -->
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="50"
+                            height="50"
+                            viewBox="0 0 100 100"
+                        >
+                            <defs>
+                                <linearGradient
+                                    id="grad"
+                                    x1="100%"
+                                    y1="100%"
+                                    x2="0%"
+                                    y2="0%"
+                                >
+                                    <stop
+                                        offset="0%"
+                                        style="
+                                            stop-color: #4f46e5;
+                                            stop-opacity: 1;
+                                        "
+                                    />
+                                    <stop
+                                        offset="100%"
+                                        style="
+                                            stop-color: #9333ea;
+                                            stop-opacity: 1;
+                                        "
+                                    />
+                                </linearGradient>
+                            </defs>
+                            <rect
+                                width="100"
+                                height="100"
+                                rx="20"
+                                fill="url(#grad)"
+                            />
+                            <text
+                                x="50%"
+                                y="55%"
+                                text-anchor="middle"
+                                dominant-baseline="middle"
+                                font-family="Arial, Helvetica, sans-serif"
+                                font-size="50"
+                                fill="white"
+                                font-weight="bold"
+                            >
+                                LM
+                            </text>
+                        </svg>
+                    </Link>
                     <p class="mt-1 text-indigo-200">
                         Discover conversations across the community
                     </p>
                 </div>
 
-                <div class="flex items-center gap-4">
-                    <div class="relative"></div>
-                    <button
+                <div v-if="!auth.user" class="flex items-center gap-4">
+                    <Link
+                        href="/login"
                         class="rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-indigo-600 shadow-md transition duration-200 hover:bg-indigo-50"
                     >
-                        New Thread
-                    </button>
+                        Login
+                    </Link>
+                    <Link
+                        href="/register"
+                        class="rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-indigo-600 shadow-md transition duration-200 hover:bg-indigo-50"
+                    >
+                        Register
+                    </Link>
+                </div>
+
+                <div v-else class="flex items-center gap-4">
+                    <Link
+                        href="/new-thread"
+                        class="rounded-lg bg-white px-4 py-2.5 text-sm font-medium text-indigo-600 shadow-md transition duration-200 hover:bg-indigo-50"
+                    >
+                        + New Thread
+                    </Link>
+                    <Link
+                        href="/logout"
+                        method="post"
+                        class="cursor-pointer rounded-lg bg-red-500 px-4 py-2.5 text-sm font-medium text-white shadow-md transition duration-200 hover:bg-red-600"
+                    >
+                        Logout
+                    </Link>
                 </div>
             </div>
         </div>
@@ -134,7 +203,17 @@
 </template>
 
 <script>
+import { Link } from '@inertiajs/vue3';
+
 export default {
+    props: {
+        auth: {
+            type: Array,
+        },
+    },
+    components: {
+        Link,
+    },
     data() {
         return {
             categories: [

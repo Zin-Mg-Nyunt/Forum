@@ -108,3 +108,10 @@ defineProps<{
         </Form>
     </AuthBase>
 </template>
+<script lang="ts">
+export default {
+    // Prevent the global default layout from being applied by createInertiaApp
+    // The page template already wraps content in an `AuthLayout`.
+    layout: null,
+};
+</script>
