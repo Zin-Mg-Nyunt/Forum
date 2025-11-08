@@ -140,7 +140,7 @@
                         :key="tab.key"
                         @click="activeTab = tab.key"
                         :class="[
-                            'rounded-lg px-4 py-2 text-sm font-medium transition duration-200',
+                            'cursor-pointer rounded-lg px-4 py-2 text-sm font-medium transition duration-200',
                             activeTab === tab.key
                                 ? 'bg-violet-600 text-white shadow-md shadow-violet-600/25'
                                 : 'bg-violet-50 text-violet-600 hover:bg-violet-100',
@@ -156,59 +156,103 @@
                         :key="thread.id"
                         class="group relative overflow-hidden rounded-xl bg-white p-5 shadow-sm transition duration-200 hover:shadow-lg"
                     >
-                        <div
-                            class="absolute inset-0 bg-gradient-to-r from-violet-500/5 to-indigo-500/5 opacity-0 transition duration-200 group-hover:opacity-100"
-                        ></div>
-                        <div class="relative flex items-start justify-between">
-                            <div class="flex-1">
-                                <div class="mb-3 flex items-center gap-3">
-                                    <h2
-                                        class="text-lg font-semibold text-gray-900"
-                                    >
-                                        {{ thread.title }}
-                                    </h2>
-                                </div>
-                                <p
-                                    class="mb-4 text-sm leading-relaxed text-gray-600"
-                                >
-                                    {{ thread.excerpt }}
-                                </p>
-
-                                <div class="flex flex-wrap items-center gap-3">
-                                    <span
-                                        v-for="tag in thread.tags"
-                                        :key="tag"
-                                        class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700"
-                                    >
-                                        {{ tag }}
-                                    </span>
-                                    <span
-                                        class="rounded-full bg-violet-100 px-3 py-1 text-xs font-medium text-violet-700"
-                                    >
-                                        {{ thread.category }}
-                                    </span>
-                                </div>
+                        <div class="">
+                            <div class="mb-3 flex items-center gap-4">
+                                <h2 class="text-lg font-semibold text-gray-900">
+                                    {{ thread.title }}
+                                </h2>
+                                <span class="p-1 text-sm text-gray-500">
+                                    2 hours ago
+                                </span>
                             </div>
+                            <p
+                                class="mb-4 text-sm leading-relaxed text-gray-600"
+                            >
+                                {{ thread.body }}
+                            </p>
 
-                            <div class="ml-6 flex-shrink-0 text-right">
-                                <div
-                                    class="rounded-xl bg-indigo-50 p-3 text-center"
+                            <div class="flex flex-wrap items-center gap-3">
+                                <!-- <span
+                                    v-for="tag in thread.tags"
+                                    :key="tag"
+                                    class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700"
                                 >
-                                    <div
-                                        class="text-xs font-medium text-indigo-600"
+                                    {{ tag }}
+                                </span> -->
+                                <span
+                                    class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700"
+                                >
+                                    vue
+                                </span>
+                                <span
+                                    class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700"
+                                >
+                                    php
+                                </span>
+                                <!-- <span
+                                    class="rounded-full bg-violet-100 px-3 py-1 text-xs font-medium text-violet-700"
+                                >
+                                    {{ thread.category }}
+                                </span> -->
+                                <span
+                                    class="rounded-full bg-violet-100 px-3 py-1 text-xs font-medium text-violet-700"
+                                >
+                                    General
+                                </span>
+                            </div>
+                            <div
+                                class="mt-4 flex items-center gap-6 text-right"
+                            >
+                                <div class="text-xs font-medium text-gray-500">
+                                    by Leo Max
+                                </div>
+
+                                <div
+                                    class="flex cursor-pointer items-center gap-2 text-xs font-bold text-gray-500"
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        width="20"
+                                        height="20"
+                                        role="img"
+                                        aria-label="Message"
                                     >
-                                        Replies
-                                    </div>
-                                    <div
-                                        class="text-sm font-bold text-indigo-700"
-                                    >
-                                        {{ thread.replies }}
-                                    </div>
+                                        <title>Message</title>
+                                        <path
+                                            fill="none"
+                                            stroke="#4f39f6"
+                                            stroke-width="1.6"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"
+                                        />
+                                    </svg>
+                                    <span> 2k </span>
                                 </div>
                                 <div
-                                    class="mt-2 text-xs font-medium text-gray-500"
+                                    class="flex cursor-pointer items-center gap-2 text-xs font-bold text-gray-500"
                                 >
-                                    by {{ thread.author }}
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="24"
+                                        height="24"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <g
+                                            fill="none"
+                                            stroke="#4f39f6"
+                                            stroke-width="1.8"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        >
+                                            <path
+                                                d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"
+                                            />
+                                            <circle cx="12" cy="12" r="3" />
+                                        </g>
+                                    </svg>
+                                    <span>1.2k</span>
                                 </div>
                             </div>
                         </div>
@@ -228,6 +272,11 @@
 
 <script>
 export default {
+    props: {
+        threads: {
+            type: Array,
+        },
+    },
     data() {
         return {
             categories: [
@@ -239,41 +288,41 @@ export default {
 
             tags: ['vue', 'laravel', 'javascript', 'css', 'design', 'help'],
 
-            threads: [
-                {
-                    id: 1,
-                    title: 'Welcome to the forum — introduce yourself!',
-                    excerpt:
-                        'Say hi and tell us what projects you are working on. Be friendly and follow the rules.',
-                    category: 'General',
-                    tags: ['welcome', 'introductions'],
-                    replies: 34,
-                    author: 'Alice',
-                    created_at: '2025-11-01',
-                },
-                {
-                    id: 2,
-                    title: 'How to set up Laravel + Vite',
-                    excerpt:
-                        'Step-by-step guide for configuring Vite with Laravel, including HMR and asset pipeline tips.',
-                    category: 'Help',
-                    tags: ['laravel', 'vite', 'setup'],
-                    replies: 12,
-                    author: 'Bob',
-                    created_at: '2025-11-04',
-                },
-                {
-                    id: 3,
-                    title: 'Design critique: new forum home mockups',
-                    excerpt:
-                        'I reworked the homepage to be more focused on conversation discovery. Feedback welcome.',
-                    category: 'Design',
-                    tags: ['design', 'ui'],
-                    replies: 8,
-                    author: 'Carla',
-                    created_at: '2025-11-07',
-                },
-            ],
+            // threads: [
+            //     {
+            //         id: 1,
+            //         title: 'Welcome to the forum — introduce yourself!',
+            //         excerpt:
+            //             'Say hi and tell us what projects you are working on. Be friendly and follow the rules.',
+            //         category: 'General',
+            //         tags: ['welcome', 'introductions'],
+            //         replies: 34,
+            //         author: 'Alice',
+            //         created_at: '2025-11-01',
+            //     },
+            //     {
+            //         id: 2,
+            //         title: 'How to set up Laravel + Vite',
+            //         excerpt:
+            //             'Step-by-step guide for configuring Vite with Laravel, including HMR and asset pipeline tips.',
+            //         category: 'Help',
+            //         tags: ['laravel', 'vite', 'setup'],
+            //         replies: 12,
+            //         author: 'Bob',
+            //         created_at: '2025-11-04',
+            //     },
+            //     {
+            //         id: 3,
+            //         title: 'Design critique: new forum home mockups',
+            //         excerpt:
+            //             'I reworked the homepage to be more focused on conversation discovery. Feedback welcome.',
+            //         category: 'Design',
+            //         tags: ['design', 'ui'],
+            //         replies: 8,
+            //         author: 'Carla',
+            //         created_at: '2025-11-07',
+            //     },
+            // ],
 
             tabs: [
                 { key: 'all', label: 'All' },
@@ -305,7 +354,7 @@ export default {
                 list = list.filter(
                     (t) =>
                         t.title.toLowerCase().includes(q) ||
-                        t.excerpt.toLowerCase().includes(q),
+                        t.body.toLowerCase().includes(q),
                 );
             }
 

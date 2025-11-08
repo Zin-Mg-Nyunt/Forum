@@ -1,12 +1,13 @@
 <?php
 
+use App\Models\Thread;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::get('/', function () {
     return inertia('Home', [
-        'canRegister' => Features::enabled(Features::registration()),
+        'threads'=> Thread::latest()->get()
     ]);
 })->name('home');
 

@@ -22,7 +22,10 @@
         {{-- Inline style to set the HTML background color based on our theme in app.css --}}
         <style>
             body{
-                background-color: #f3f3f3
+                background-color: #f3f3f3;
+            }
+            #app{
+                height: 100vh;
             }
         </style>
 
