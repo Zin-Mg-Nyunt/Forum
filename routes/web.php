@@ -9,6 +9,7 @@ use Laravel\Fortify\Features;
 Route::get('/', [ThreadController::class,'index'])->name('home');
 Route::get('/threads/{thread}',[ThreadController::class,'show'])->name('show');
 Route::get('/new-thread',[ThreadController::class,'create'])->name('newThread');
-Route::post('/createThread',[ThreadController::class,'store']);
+Route::post('/createThread',[ThreadController::class,'store'])->name('create');
+Route::delete('/destroy/{thread}',[ThreadController::class,'destroy'])->name('thread.destroy');
 
 require __DIR__.'/settings.php';

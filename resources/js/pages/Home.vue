@@ -1,6 +1,6 @@
 <template>
     <!-- Nav / Tabs -->
-    <nav class="mb-6 flex items-center justify-between">
+    <nav class="mb-6 flex items-start justify-between">
         <div>
             <button
                 v-for="tab in tabs"
@@ -15,6 +15,11 @@
             >
                 {{ tab.label }}
             </button>
+            <div class="pl-4">
+                <span class="text-sm font-bold text-gray-400">
+                    Total - {{ filteredThreads.length }}
+                </span>
+            </div>
         </div>
         <div>
             <input
@@ -27,7 +32,7 @@
     </nav>
 
     <!-- scrollbar-hide is custom class from app.css -->
-    <div class="scrollbar-hide h-170 space-y-4 overflow-auto">
+    <div class="scrollbar-hide h-110 space-y-4 overflow-auto 2xl:h-170">
         <article
             v-for="thread in filteredThreads"
             :key="thread.id"
@@ -52,13 +57,6 @@
                 </p>
 
                 <div class="flex flex-wrap items-center gap-3">
-                    <!-- <span
-                                    v-for="tag in thread.tags"
-                                    :key="tag"
-                                    class="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700"
-                                >
-                                    {{ tag }}
-                                </span> -->
                     <span
                         class="rounded-full bg-emerald-50 px-3 py-1 text-sm font-medium text-emerald-700"
                     >
@@ -75,57 +73,80 @@
                         {{ thread.category?.name }}
                     </span>
                 </div>
-                <div class="mt-4 flex items-center gap-6 text-right">
-                    <div class="text-sm font-medium text-gray-500">
-                        by {{ thread.user?.name }}
-                    </div>
+                <div class="mt-4 flex items-center justify-between">
+                    <div class="flex items-center gap-6 text-right">
+                        <div class="text-sm font-medium text-gray-500">
+                            by {{ thread.user?.name }}
+                        </div>
 
-                    <div
-                        class="flex cursor-pointer items-center gap-2 text-xs font-bold text-gray-500"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 24 24"
-                            width="20"
-                            height="20"
-                            role="img"
-                            aria-label="Message"
+                        <div
+                            class="flex cursor-pointer items-center gap-2 text-xs font-bold text-gray-500"
                         >
-                            <title>Message</title>
-                            <path
-                                fill="none"
-                                stroke="#4f39f6"
-                                stroke-width="1.6"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"
-                            />
-                        </svg>
-                        <span> 2k </span>
-                    </div>
-                    <div
-                        class="flex cursor-pointer items-center gap-2 text-xs font-bold text-gray-500"
-                    >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                        >
-                            <g
-                                fill="none"
-                                stroke="#4f39f6"
-                                stroke-width="1.8"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                width="20"
+                                height="20"
+                                role="img"
+                                aria-label="Message"
                             >
+                                <title>Message</title>
                                 <path
-                                    d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"
+                                    fill="none"
+                                    stroke="#4f39f6"
+                                    stroke-width="1.6"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"
                                 />
-                                <circle cx="12" cy="12" r="3" />
-                            </g>
-                        </svg>
-                        <span>1.2k</span>
+                            </svg>
+                            <span> 2k </span>
+                        </div>
+                        <div
+                            class="flex cursor-pointer items-center gap-2 text-xs font-bold text-gray-500"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                            >
+                                <title>View</title>
+                                <g
+                                    fill="none"
+                                    stroke="#4f39f6"
+                                    stroke-width="1.8"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <path
+                                        d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"
+                                    />
+                                    <circle cx="12" cy="12" r="3" />
+                                </g>
+                            </svg>
+                            <span>1.2k</span>
+                        </div>
+                    </div>
+                    <div>
+                        <Link
+                            :href="route('thread.destroy', thread.id)"
+                            method="delete"
+                            class="cursor-pointer"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="26"
+                                height="26"
+                                viewBox="0 0 24 24"
+                            >
+                                <title>Delete</title>
+                                <path
+                                    fill="red"
+                                    d="M9 3h6l1 2h5v2H3V5h5l1-2zm1 6h2v8h-2V9zm4 0h2v8h-2V9zm-8 0h2v8H6V9zm2 12h8a2 2 0 0 0 2-2l1-12H5l1 12a2 2 0 0 0 2 2z"
+                                />
+                            </svg>
+                        </Link>
                     </div>
                 </div>
             </div>

@@ -37,4 +37,8 @@ class ThreadController extends Controller
         $thread->save();
         return redirect('/');
     }
+    public function destroy(Thread $thread){
+        $thread->delete();
+        return redirect('/');
+    }
 }
