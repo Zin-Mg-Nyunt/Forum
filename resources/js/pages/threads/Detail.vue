@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ref } from 'vue';
 
 const { thread } = defineProps({
-    thread: Array,
+    thread: Object,
 });
 
 const newReply = ref('');
@@ -94,10 +94,10 @@ function formatDate(date) {
                     >
                         <!-- Author Info -->
                         <div class="font-medium text-gray-500">
-                            Author - {{ thread.user?.name }}
+                            Posted by - {{ thread.user?.name }}
                         </div>
                         <div class="text-sm text-gray-500">
-                            Posted {{ formatDate(thread.created_at) }}
+                            {{ formatDate(thread.created_at) }}
                         </div>
                         <div class="flex items-center space-x-4">
                             <Button

@@ -27,10 +27,19 @@ class Thread extends Model
     }
 
     public function scopeFilter($query,$filter){
-        $query->when($filter??false,function ($query) use($filter){
+        $query->when($filter['category']??false,function ($query,$filter){
             $query->whereHas('category',function($query) use($filter){
-            $query->where('slug',$filter);
+            $query->where('slug',$filter);  
+            });
         });
-    });
+        $query->when($filter['tag']??false,function ($query,$filter){
+            $query->whereHas('tags',function($query) use($filter){
+            $query->where('slug',$filter);
+            });
+        });
+        $query->when($filter['search']??false,function ($query,$filter){
+            $query->whereLike('title','%'.$filter.'%')
+                ->orWhereLike('body','%'.$filter.'%');
+        });
     }
 }

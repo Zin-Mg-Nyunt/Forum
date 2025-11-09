@@ -9,7 +9,7 @@ class ThreadController extends Controller
 {
     public function index() {
         return inertia('Home', [
-            'threads'=> Thread::filter(request('category'))->latest()->get()
+            'threads'=> Thread::filter(request(['category','tag','search']))->latest()->get()
         ]);
     }
     public function show(Thread $thread){
@@ -21,7 +21,6 @@ class ThreadController extends Controller
         return inertia('NewThread');
     }
     public function store(){
-        $thread = new Thread;
         request()->validate([
             'title'=>'required',
             'body'=>'required',
@@ -29,6 +28,8 @@ class ThreadController extends Controller
         ],[
             'category_id.required'=>"The category field is required"
         ]);
+
+        $thread = new Thread;
         $thread->title = request('title');
         $thread->body = request('body');
         $thread->category_id = request('category_id');

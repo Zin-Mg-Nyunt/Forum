@@ -36,7 +36,7 @@
             <div class="">
                 <div class="mb-3 flex items-center gap-4">
                     <Link
-                        :href="'/threads/' + thread.id"
+                        :href="route('show', thread.id)"
                         class="text-xl font-semibold text-gray-900"
                     >
                         {{ thread.title }}
@@ -178,22 +178,23 @@ export default {
             } else if (this.activeTab === 'unanswered') {
                 list = list.filter((t) => t.replies === 0);
             }
-
-            // Simple query filter
-            if (this.query.trim()) {
-                const q = this.query.toLowerCase();
-                list = list.filter(
-                    (t) =>
-                        t.title.toLowerCase().includes(q) ||
-                        t.body.toLowerCase().includes(q),
-                );
-            }
-
             return list;
         },
     },
     methods: {
         moment,
+    },
+    watch: {
+        query() {
+            this.$inertia.get(
+                route('home', { search: this.query }),
+                {},
+                {
+                    preserveState: true, // this is need in inertia new version
+                    replace: true,
+                },
+            );
+        },
     },
 };
 </script>

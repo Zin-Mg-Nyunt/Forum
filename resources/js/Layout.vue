@@ -5,7 +5,7 @@
         <div class="mx-auto max-w-7xl">
             <div class="flex items-center justify-between">
                 <div>
-                    <Link href="/">
+                    <Link :href="route('home')">
                         <!-- Logo -->
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -109,7 +109,9 @@
                         <ul class="space-y-2">
                             <li v-for="cat in categories" :key="cat.id">
                                 <Link
-                                    :href="'/?category=' + cat.slug"
+                                    :href="
+                                        route('home', { category: cat.slug })
+                                    "
                                     class="block rounded-md bg-white/50 px-3 py-2.5 text-left transition duration-200 hover:bg-white hover:shadow-sm"
                                 >
                                     <div
@@ -136,13 +138,14 @@
                             Tags
                         </h3>
                         <div class="flex flex-wrap gap-2">
-                            <button
+                            <Link
+                                :href="route('home', { tag: tag.slug })"
                                 v-for="tag in tags"
                                 :key="tag"
                                 class="rounded-full bg-white/70 px-3 py-1.5 text-sm font-medium text-emerald-700 shadow-sm transition duration-200 hover:bg-white hover:text-emerald-800 hover:shadow"
                             >
                                 {{ tag.name }}
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 </div>
@@ -210,7 +213,7 @@ import { Link } from '@inertiajs/vue3';
 export default {
     props: {
         auth: {
-            type: Array,
+            type: Object,
         },
         categories: {
             type: Array,

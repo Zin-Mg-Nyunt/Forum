@@ -7,12 +7,8 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 
 Route::get('/', [ThreadController::class,'index'])->name('home');
-
-Route::get('/threads/{thread}',[ThreadController::class,'show']);
-
-
+Route::get('/threads/{thread}',[ThreadController::class,'show'])->name('show');
 Route::get('/new-thread',[ThreadController::class,'create'])->name('newThread');
-
 Route::post('/createThread',[ThreadController::class,'store']);
 
 require __DIR__.'/settings.php';
