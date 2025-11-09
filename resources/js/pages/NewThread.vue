@@ -3,19 +3,19 @@ import { Button } from '@/components/ui/button';
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
-defineProps({
+const { categories, tags, errors } = defineProps({
     categories: Array,
     tags: Array,
+    errors: Object,
 });
 
-const errors = ref({});
 const selectedTag = ref('');
 
 const form = ref(
     useForm({
         title: '',
         body: '',
-        category: '',
+        category_id: '',
         tags: [],
     }),
 );
@@ -66,7 +66,6 @@ function createThread() {
                         id="title"
                         v-model="form.title"
                         type="text"
-                        required
                         class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 focus:outline-none"
                         placeholder="What would you like to discuss?"
                     />
@@ -86,8 +85,7 @@ function createThread() {
                     </label>
                     <select
                         id="category"
-                        v-model="form.category"
-                        required
+                        v-model="form.category_id"
                         class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 focus:outline-none"
                     >
                         <option value="" disabled>Select a category</option>
@@ -99,6 +97,12 @@ function createThread() {
                             {{ category.name }}
                         </option>
                     </select>
+                    <p
+                        v-if="errors.category_id"
+                        class="mt-1 text-sm text-red-500"
+                    >
+                        {{ errors.category_id }}
+                    </p>
                 </div>
 
                 <!-- Selected Tags -->
@@ -164,7 +168,6 @@ function createThread() {
                         id="body"
                         v-model="form.body"
                         rows="8"
-                        required
                         class="mt-1 block w-full rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-400 focus:border-violet-500 focus:ring-2 focus:ring-violet-500/20 focus:outline-none"
                         placeholder="Write your thread content here..."
                     ></textarea>

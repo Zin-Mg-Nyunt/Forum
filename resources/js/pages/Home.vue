@@ -35,7 +35,10 @@
         >
             <div class="">
                 <div class="mb-3 flex items-center gap-4">
-                    <Link class="text-xl font-semibold text-gray-900">
+                    <Link
+                        :href="'/threads/' + thread.id"
+                        class="text-xl font-semibold text-gray-900"
+                    >
                         {{ thread.title }}
                     </Link>
                     <span class="p-1 text-sm text-gray-500">
